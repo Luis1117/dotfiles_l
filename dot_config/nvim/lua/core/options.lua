@@ -1,0 +1,16 @@
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.mouse = "a"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.wrap = false
+vim.opt.termguicolors = true
+vim.opt.spell = true
+vim.opt.spelllang = { "pt", "en" }
+vim.opt.redrawtime = 10000  -- 10 segundos (padrão é 2000)
+vim.opt.synmaxcol = 3000 
+vim.opt.cursorline = true

@@ -1,0 +1,108 @@
+
+# [mgr]
+# prepend_keymap = [
+#   { on = "i", run = "shell 'nomacs \"$@\" > /dev/null 2>&1 &'", desc = "Abrir imagem com nomacs (background)" },
+#   { on = "v", run = "open --filter djvu --or-run djvu", desc = "Abrir DJVU com Atril" }
+# ]
+
+#.config/yazi/keymap.toml 
+# Schema para validação
+# "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+# ============================================
+# 🗂️ MANAGER (gerenciador de arquivos)
+# ============================================
+[manager]
+
+# ============================================
+# ⌨️ KEYMAPS CUSTOMIZADOS
+# ============================================
+[[manager.prepend_keymap]]
+on = "i"
+run = "shell 'nomacs \"$@\" > /dev/null 2>&1 &'"
+desc = "Abrir imagem com nomacs (background)"
+
+[[manager.prepend_keymap]]
+on = "v"
+run = "open --filter djvu --or-run djvu"
+desc = "Abrir DJVU com Atril"
+
+# ============================================
+# 🔖 BOOKMARKS (Favoritos)
+# ============================================
+[[manager.prepend_keymap]]
+on = "m"
+run = "plugin bookmarks --args=save"
+desc = "💾 Salvar bookmark"
+
+[[manager.prepend_keymap]]
+on = "'"
+run = "plugin bookmarks --args=jump"
+desc = "📌 Pular para bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "d" ]
+run = "plugin bookmarks --args=delete"
+desc = "🗑️ Deletar bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "D" ]
+run = "plugin bookmarks --args=delete_all"
+desc = "🗑️ Deletar TODOS bookmarks"
+
+# ============================================
+# 🔍 SMART FILTER
+# ============================================
+[[manager.prepend_keymap]]
+on = "f"
+run = "plugin smart-filter"
+desc = "🔎 Smart filter"
+
+# ============================================
+# 📂 NAVEGAÇÃO RÁPIDA
+# ============================================
+[[manager.prepend_keymap]]
+on = [ "g", "h" ]
+run = "cd ~"
+desc = "Ir para HOME"
+
+[[manager.prepend_keymap]]
+on = [ "g", "c" ]
+run = "cd ~/.config"
+desc = "Ir para ~/.config"
+
+[[manager.prepend_keymap]]
+on = [ "g", "d" ]
+run = "cd ~/Downloads"
+desc = "Ir para Downloads"
+
+[[manager.prepend_keymap]]
+on = [ "g", "D" ]
+run = "cd ~/Documents"
+desc = "Ir para Documentos"
+
+# ============================================
+# 🔧 AÇÕES ÚTEIS
+# ============================================
+[[manager.prepend_keymap]]
+on = "T"
+run = "shell 'kitty --detach &'"
+desc = "🖥️ Abrir terminal aqui"
+
+[[manager.prepend_keymap]]
+on = "E"
+run = "shell '$EDITOR \"$@\"'"
+desc = "📝 Editar com $EDITOR"
+
+# ============================================
+# 📋 CLIPBOARD
+# ============================================
+# [[manager.prepend_keymap]]
+# on = [ "c", "p" ]
+# run = "shell 'echo -n \"$0\" | xclip -selection clipboard'"
+# desc = "📋 Copiar path absoluto"
+
+# [[manager.prepend_keymap]]
+# on = [ "c", "n" ]
+# run = "shell 'echo -n \"$(basename $0)\" | xclip -selection clipboard'"
+# desc = "📋 Copiar nome do arquivo"

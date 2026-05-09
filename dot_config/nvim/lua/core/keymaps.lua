@@ -74,9 +74,10 @@ map("n", "<A-h>", ":BufferLineMovePrev<CR>",   { desc = "Mover buffer à esquerd
 map("n", "<A-l>", ":BufferLineMoveNext<CR>",   { desc = "Mover buffer à direita" })
 
 for i = 1, 9 do
-  map("n", "<A-" .. i .. ">", "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>",
-    { desc = "Ir para buffer " .. i })
-end
+  map("n", "<A-" .. i .. ">", function()
+    require("bufferline").go_to(i, true)
+  end, { desc = "Ir para buffer " .. i })
+end 
 
 map("n", "<leader>bo",  ":BufferLineCloseOthers<CR>",  { desc = "Fechar outros buffers" })
 map("n", "<leader>br",  ":BufferLineCloseRight<CR>",   { desc = "Fechar buffers à direita" })

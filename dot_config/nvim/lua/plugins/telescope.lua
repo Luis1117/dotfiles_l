@@ -102,6 +102,57 @@ end
 _G.pick_bib_and_search = pick_bib_and_search
 
 -- ─────────────────────────────────────────────────────────────────────────────
+-- FIX: Picker de diretórios — mostra caminho relativo e abre com Oil
+-- ─────────────────────────────────────────────────────────────────────────────
+local function pick_directory()
+  local pickers = require("telescope.pickers")
+  local finders = require("telescope.finders")
+  local conf    = require("telescope.config").values
+  local actions = require("telescope.actions")
+  local state   = require("telescope.actions.state")
+
+  local root = get_project_root()
+
+  -- find all directories from project root
+  local dirs = vim.fn.systemlist(
+    "fd --type d --hidden --exclude .git . " .. vim.fn.shellescape(root)
+  )
+
+  if #dirs == 0 then
+    vim.notify("Nenhum diretório encontrado!", vim.log.levels.WARN)
+    return
+  end
+
+  pickers.new({}, {
+    prompt_title = "📂 Abrir Pasta (Oil)",
+    finder = finders.new_table({
+      results = dirs,
+      entry_maker = function(dir)
+        -- FIX: shows relative path so directory names are visible
+        local display = dir:gsub(vim.pesc(root) .. "/", "")
+        if display == "" then display = "." end
+        return {
+          value   = dir,
+          display = display,   -- ✅ relative path visible in Telescope window
+          ordinal = display,
+        }
+      end,
+    }),
+    sorter = conf.generic_sorter({}),
+    attach_mappings = function(prompt_bufnr)
+      actions.select_default:replace(function()
+        local sel = state.get_selected_entry()
+        actions.close(prompt_bufnr)
+        if sel then
+          require("oil").open(sel.value)
+        end
+      end)
+      return true
+    end,
+  }):find()
+end
+
+-- ─────────────────────────────────────────────────────────────────────────────
 
 return {
 
@@ -180,6 +231,12 @@ return {
         end,
         desc = "Buscar palavra no buffer atual",
       },
+      {
+        -- FIX: now uses proper directory picker with visible names
+        "<leader>fP",
+        function() pick_directory() end,
+        desc = "Find Pasta (Oil)",
+      },
     },
 
     config = function()
@@ -189,6 +246,7 @@ return {
           layout_config = {
             horizontal = { preview_width = 0.5 },
           },
+          path_display = { "tail" },  -- shows only filename, no path
         },
         extensions = {
           bibtex = {

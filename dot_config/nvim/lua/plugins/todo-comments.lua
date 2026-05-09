@@ -21,17 +21,17 @@ return {
     },
     {
       "<leader>ft",
-      "<cmd>TodoTelescope<cr>",
+      "<cmd>TodoTelescope keywords=TODO,FIX,HACK,WARN,PERF,NOTE,QWIP<cr>",
       desc = "Search TODOs",
     },
     {
       "<leader>fT",
-      "<cmd>TodoQuickFix<cr>",
+      "<cmd>TodoQuickFix keywords=TODO,FIX,HACK,WARN,PERF,NOTE,QWIP<cr>",
       desc = "TODOs quickfix",
     },
     {
       "<leader>tl",
-      "<cmd>TodoLocList<cr>",
+      "<cmd>TodoLocList keywords=TODO,FIX,HACK,WARN,PERF,NOTE,QWIP<cr>",
       desc = "TODOs in loclist",
     },
   },
@@ -92,7 +92,7 @@ return {
           "--line-number",
           "--column",
         },
-        pattern = [[\b(KEYWORDS)\s*:]],
+        pattern = [[\b(KEYWORDS)\b\s*:]],
       },
     })
   end,

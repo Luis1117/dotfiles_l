@@ -26,7 +26,7 @@ vim.g.loaded_node_provider = 0
 -- ====================================================================
 vim.opt.scrolloff    = 10
 vim.opt.updatetime   = 300
-vim.opt.timeoutlen   = 500
+vim.opt.timeoutlen   = 300
 vim.opt.lazyredraw   = true
 vim.opt.synmaxcol    = 3000
 vim.opt.swapfile     = false
@@ -38,6 +38,11 @@ vim.opt.undodir      = vim.fn.expand("~/.local/state/nvim/undo//")
 
 vim.fn.mkdir(vim.fn.expand("~/.local/state/nvim/backup"), "p")
 vim.fn.mkdir(vim.fn.expand("~/.local/state/nvim/undo"), "p")
+
+-- ====================================================================
+-- OPÇÕES DE EXIBIÇÃO (modular)
+-- ====================================================================
+require("options")
 
 -- ====================================================================
 -- GARBAGE COLLECTION AUTOMÁTICO
@@ -161,24 +166,77 @@ return {
   -- ── Conform base ──────────────────────────────────────────────────
   { "stevearc/conform.nvim" },
 
-  -- ── Tema ──────────────────────────────────────────────────────────
+  -- ── Tema: Everforest Dark Medium ──────────────────────────────────
   {
-    "EdenEast/nightfox.nvim",
-    lazy     = false,
+
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
     priority = 1000,
-    config   = function()
-      require("nightfox").setup({
-        options = {
-          transparent     = true,
-          terminal_colors = true,
-          dim_inactive    = false,
-          styles = {
-            comments     = "italic",
-            conditionals = "italic",
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- 🌙 dark mais suave
+
+        transparent_background = true, -- mantém teu estilo atual
+
+        styles = {
+          comments = { "italic" },
+          keywords = { "bold" },
+          functions = { "bold" },
+        },
+
+        integrations = {
+          treesitter = true,
+          illuminate = true,
+          telescope = true,
+          native_lsp = {
+            enabled = true,
           },
+      },
+    })
+    vim.cmd.colorscheme("catppuccin")
+  end,},
+
+  -- ── vim-illuminate ────────────────────────────────────────────────
+  {
+    "RRethy/vim-illuminate",
+    event  = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("illuminate").configure({
+        delay        = 80,
+        providers    = { "treesitter", "lsp", "regex" },
+        under_cursor = true,
+        filetypes_denylist = {
+          "neo-tree",
+          "dashboard",
+          "trouble",
+          "aerial",
+          "toggleterm",
+          "TelescopePrompt",
+          "harpoon",
         },
       })
-      vim.cmd("colorscheme nightfox")
+
+      local function set_illuminate_hl()
+        vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#3c474d" })
+        vim.api.nvim_set_hl(0, "IlluminatedWordRead",  { bg = "#3c474d" })
+        vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {
+          bg        = "#374247",
+          underline = true,
+          sp        = "#83c092",
+        })
+      end
+
+      set_illuminate_hl()
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = set_illuminate_hl,
+      })
+
+      vim.keymap.set("n", "]]", require("illuminate").goto_next_reference,
+        { desc = "Illuminate: próxima ocorrência" })
+      vim.keymap.set("n", "[[", require("illuminate").goto_prev_reference,
+        { desc = "Illuminate: ocorrência anterior" })
     end,
   },
 
@@ -236,16 +294,17 @@ return {
   { "dpezto/gnuplot.vim", ft = { "gnuplot" } },
 
   -- ── Imports ───────────────────────────────────────────────────────
-  { import = "plugins.lsp"       },
-  { import = "plugins.image"     },
-  { import = "plugins.python"    },
-  { import = "plugins.latex"     },
-  { import = "plugins.julia"     },
-  { import = "plugins.git"       },
-  { import = "plugins.c-dev"     },
-  { import = "plugins.telescope" },
-  { import = "plugins.frecency"  },
-  { import = "plugins.harpoon"   },
-  { import = "plugins.neo-tree"  },
-  { import = "plugins.nvumi"     },
+  { import = "plugins.lsp"        },
+  { import = "plugins.image"      },
+  { import = "plugins.python"     },
+  { import = "plugins.latex"      },
+  { import = "plugins.julia"      },
+  { import = "plugins.git"        },
+  { import = "plugins.c-dev"      },
+  { import = "plugins.telescope"  },
+  { import = "plugins.frecency"   },
+  { import = "plugins.harpoon"    },
+  { import = "plugins.neo-tree"   },
+  { import = "plugins.nvumi"      },
+  { import = "plugins.colorizer"  },  -- novo
 }

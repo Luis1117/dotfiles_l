@@ -66,7 +66,7 @@ return {
           reveal = { 'close' }
         },
 
-        sort_by = 'insert_after_current',
+        sort_by = 'id',
       },
 
       highlights = {

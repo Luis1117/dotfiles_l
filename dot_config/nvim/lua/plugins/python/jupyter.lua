@@ -49,22 +49,27 @@ return {
       { "<leader>mj", "<cmd>MoltenSave<CR>",           desc = "Molten: Save JSON" },
       { "<leader>mJ", "<cmd>MoltenLoad<CR>",           desc = "Molten: Load JSON" },
 
-      -- Executar seleção visual mantendo cursor no fim da seleção
+      -- FIX: Executar seleção visual e mover cursor para o FIM da seleção
       {
         "<leader>mc",
         function()
-          -- estas funções funcionam DENTRO do visual mode
-          local end_row = vim.fn.line("v")
-          local cur_row = vim.fn.line(".")
-          local last    = math.max(end_row, cur_row)
-          local last_col = vim.fn.col(math.max(end_row, cur_row) == end_row and "v" or ".")
-          vim.cmd(":<C-u>MoltenEvaluateVisual")
-          vim.api.nvim_win_set_cursor(0, { last, math.max(last_col - 1, 0) })
+          -- Exit visual mode first so marks are set correctly
+          local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+          vim.api.nvim_feedkeys(esc, "x", false)
+
+          -- NOW the '> mark is reliable
+          local end_row = vim.fn.line("'>")
+
+          vim.cmd("MoltenEvaluateVisual")
+
+          vim.schedule(function()
+            vim.api.nvim_win_set_cursor(0, { end_row, 0 })
+            vim.cmd("normal! $")
+          end)
         end,
         mode = "v",
-        desc = "Molten: Run visual",
+        desc = "Molten: Run visual (cursor → end)",
       },
-
       -- Copiar output para clipboard
       {
         "<leader>my",

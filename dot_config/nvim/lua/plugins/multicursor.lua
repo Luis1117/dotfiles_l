@@ -72,7 +72,6 @@ return {
     -- ================================================================
     -- Sair / limpar
     -- ================================================================
-
     vim.keymap.set({ "n", "v" }, "<Esc>", function()
       if not mc.cursorsEnabled() then
         mc.enableCursors()
@@ -80,6 +79,7 @@ return {
         mc.clearCursors()
       else
         vim.cmd("noh")
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
       end
     end, { desc = "MC: limpar cursors / noh" })
 

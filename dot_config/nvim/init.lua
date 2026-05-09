@@ -1,7 +1,9 @@
 -- ~/.config/nvim/init.lua
 
 -- Configurar Python provider ANTES de tudo
-vim.g.python3_host_prog = vim.fn.expand("~/.config/nvim/venv/bin/python3")
+vim.g.python3_host_prog = "/usr/bin/python3"
+vim.opt.guifont = "JetBrainsMono Nerd Font:h12" 
+
 
 -- Path do LuaJIT para o magick (image.nvim)
 package.path = package.path .. ";" .. vim.fn.expand("~/.luarocks/share/lua/5.1/?.lua")

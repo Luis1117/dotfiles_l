@@ -1,0 +1,4 @@
+.config/nvim/venv
+.config/nvim/undo
+.config/nvim/backup
+.config/nvim/.git

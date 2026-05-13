@@ -1,0 +1,96 @@
+## Color palette - Flexoki Light
+## Based on https://github.com/kepano/flexoki
+
+[manager]
+marker_copied = { fg = "#3AA99F", bg = "#3AA99F" }
+marker_cut = { fg = "#D14D41", bg = "#D14D41" }
+marker_marked = { fg = "#8B7EC8", bg = "#8B7EC8" }
+marker_selected = { fg = "#DA702C", bg = "#DA702C" }
+cwd = { fg = "#D0A215", bold = true }
+hovered = { reversed = true }
+preview_hovered = { reversed = true }
+find_keyword = { fg = "#DA702C", bg = "#FFFCF0" }
+find_position = {}
+tab_active = { reversed = true }
+tab_inactive = {}
+tab_width = 1
+count_copied = { fg = "#FFFCF0", bg = "#3AA99F" }
+count_cut = { fg = "#FFFCF0", bg = "#D14D41" }
+count_selected = { fg = "#FFFCF0", bg = "#D0A215" }
+border_symbol = "│"
+border_style = { fg = "#CECDC3" }
+
+[mode]
+normal_main = { fg = "#FFFCF0", bg = "#4385BE" }
+normal_alt = { fg = "#4385BE", bg = "#E6E4D9" }
+select_main = { fg = "#FFFCF0", bg = "#8B7EC8" }
+select_alt = { fg = "#8B7EC8", bg = "#E6E4D9" }
+unset_main = { fg = "#FFFCF0", bg = "#D0A215" }
+unset_alt = { fg = "#D0A215", bg = "#E6E4D9" }
+
+[status]
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+overall = { fg = "#282726", bg = "#FFFCF0" }
+progress_label = { fg = "#4385BE", bg = "#E6E4D9", bold = true }
+progress_normal = { fg = "#E6E4D9", bg = "#F2F0E5" }
+progress_error = { fg = "#E6E4D9", bg = "#F2F0E5" }
+perm_type = { fg = "#879A39" }
+perm_read = { fg = "#D0A215" }
+perm_write = { fg = "#D14D41" }
+perm_exec = { fg = "#3AA99F" }
+perm_sep = { fg = "#8B7EC8" }
+
+[pick]
+border = { fg = "#4385BE" }
+active = { fg = "#8B7EC8", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#4385BE" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[completion]
+border = { fg = "#4385BE" }
+active = { reversed = true }
+inactive = {}
+
+[tasks]
+border = { fg = "#4385BE" }
+title = {}
+hovered = { fg = "#8B7EC8" }
+
+[which]
+cols = 2
+separator = " - "
+separator_style = { fg = "#CECDC3" }
+mask = { bg = "#FFFCF0" }
+rest = { fg = "#CECDC3" }
+cand = { fg = "#4385BE" }
+desc = { fg = "#DAD8CE" }
+
+[help]
+on = { fg = "#3AA99F" }
+run = { fg = "#8B7EC8" }
+desc = {}
+hovered = { reversed = true, bold = true }
+footer = { fg = "#100F0F", bg = "#E6E4D9" }
+
+[notify]
+title_info = { fg = "#879A39" }
+title_warn = { fg = "#D0A215" }
+title_error = { fg = "#D14D41" }
+
+[filetype]
+rules = [
+    { mime = "image/*", fg = "#D0A215" },
+    { mime = "{audio,video}/*", fg = "#8B7EC8" },
+    { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#D14D41" },
+    { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#3AA99F" },
+    { name = "*", is = "orphan", fg = "#DA702C" },
+    { name = "*", is = "exec", fg = "#879A39" },
+    { name = "*", fg = "#100F0F" },
+    { name = "*/", fg = "#4385BE" },
+]

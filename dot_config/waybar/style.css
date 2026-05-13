@@ -1,113 +1,131 @@
+/* ── Reset global ─────────────────────────────────────────────────────────── */
 * {
   border: none;
-  border-radius: 10px;
-  font-family: "JetbrainsMono Nerd Font";
+  border-radius: 0;
+  font-family: "FiraCode Nerd Font";
   font-size: 15px;
-  min-height: 10px;
+  min-height: 0px;
+  transition: none;
 }
 
-window {}
-
+/* ── Janela principal — transparente ─────────────────────────────────────── */
 window#waybar {
-  background-color: #1A1B26;
-  border-radius: 15px;
-  margin-top: 6px;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  background: transparent;
+  border-radius: 0;
 }
 
 window#waybar.hidden {
-  opacity: 0.2;
+  opacity: 0.3;
 }
 
-#window {
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 10px;
-  transition: none;
-  color: transparent;
-  background: transparent;
-}
-
-#workspaces {
-  margin: 6px 6px 6px 6px;
-  border-radius: 18px;
+/* ── Estilo base de cada ilha ─────────────────────────────────────────────── */
+#workspaces,
+#clock,
+#cpu,
+#memory,
+#disk,
+#network,
+#pulseaudio,
+#battery,
+#backlight,
+#tray,
+#custom-launcher,
+#custom-power,
+#custom-updates,
+#custom-media {
   background: #222330;
-  transition: none;
-  padding-left: 12px;
-  padding-right: 6px;
+  border-radius: 18px;
+  padding: 4px 10px;
+  margin: 4px 4px;
+  color: #F1F1F1;
+}
+
+/* ── Launcher ─────────────────────────────────────────────────────────────── */
+#custom-launcher {
+  font-size: 22px;
+  color: #7dcfff;
+  padding-left: 8px;
+  padding-right: 5px;
+  margin-left: 6px;
+}
+
+/* ── Workspaces ───────────────────────────────────────────────────────────── */
+#workspaces {
+  padding: 6px 8px;
+  margin: 6px 6px;
+  background: #222330;
 }
 
 #workspaces button {
-  transition: none;
   color: #B5E8E6;
   background: transparent;
-  margin-right: 10px;
-}
-
-#workspaces button.persistent {
+  padding: 0 10px;
+  border-radius: 8px;
   transition: none;
-  color: #7aa2f7;
-  background: transparent;
-  font-size: 4px;
-}
-
-#workspaces button.empty {
-  color: #583794;
-  font-size: 2px;
-  transition: none;
-  background: transparent;
 }
 
 #workspaces button.active {
-  transition: none;
   color: #e0af68;
-  background: transparent;
-  font-size: 4px;
+  font-size: 6px;
 }
 
+#workspaces button.persistent {
+  color: #FF6B35;
+  font-size: 6px;
+}
+
+#workspaces button.empty {
+  color: #c0c0c0;
+  font-size: 2px;
+}
+
+#workspaces button:hover {
+  background: #2a2b3d;
+  color: #c0caf5;
+}
+
+/* ── CPU ──────────────────────────────────────────────────────────────────── */
+#cpu {
+  color: #89b4fa;
+}
+
+/* ── Memória ──────────────────────────────────────────────────────────────── */
+#memory {
+  color: #c3a6ff;
+}
+
+/* ── Disco ────────────────────────────────────────────────────────────────── */
+#disk {
+  color: #73daca;
+}
+
+/* ── Rede ─────────────────────────────────────────────────────────────────── */
 #network {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 6px;
-  border-radius: 18px;
-  font-size: 14px;
-  font-weight: bold;
-  transition: none;
   color: #e0af68;
-  background: #222330;
+  font-size: 15px;
+  font-weight: bold;
 }
 
+#network.disconnected {
+  color: #f7768e;
+}
+
+/* ── Áudio ────────────────────────────────────────────────────────────────── */
 #pulseaudio {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 6px;
-  border-radius: 18px;
-  font-size: 14px;
-  font-weight: bold;
-  transition: none;
   color: #F1F1F1;
-  background: #222330;
+  font-size: 15px;
+  font-weight: bold;
 }
 
+#pulseaudio.muted {
+  color: #565f89;
+}
+
+/* ── Bateria ──────────────────────────────────────────────────────────────── */
 #battery {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 6px;
-  border-radius: 18px;
-  transition: none;
-  font-size: 14px;
+  color: #9ece6a;
+  font-size: 15px;
   font-weight: bold;
-  color: #161320;
-  background: #222330;
 }
 
 #battery.charging,
@@ -127,137 +145,80 @@ window#waybar.hidden {
 }
 
 @keyframes blink {
-  to {
-    color: #B5E8E0;
-  }
+  to { color: #B5E8E0; }
 }
 
-#backlight {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 0px;
-  border-radius: 10px;
-  transition: none;
-  color: #161320;
-  background: #F8BD96;
-}
-
+/* ── Relógio ──────────────────────────────────────────────────────────────── */
 #clock {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 0px;
-  margin-bottom: 6px;
-  border-radius: 18px;
-  transition: none;
-  font-size: 14px;
-  font-weight: bold;
   color: #F1F1F1;
-  background: #222330;
-}
-
-#memory {
-  margin: 6px 0px 6px 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 18px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
-  transition: none;
-  color: #F1F1F1;
-  background: #222330;
+  padding: 4px 18px;
+  margin: 6px 8px;
 }
 
-#disk {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  margin-bottom: 6px;
-  padding-right: 10px;
-  border-radius: 18px;
-  font-size: 14px;
-  font-weight: bold;
-  transition: none;
-  color: #F1F1F1;
-  background: #222330;
-
-}
-
-#cpu {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  margin-bottom: 6px;
-  padding-right: 10px;
-  border-radius: 18px;
-  font-size: 14px;
-  font-weight: bold;
-  transition: none;
-  color: #F1F1F1;
-  background: #222330;
-}
-
-#tray {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  margin-bottom: 0px;
-  padding-right: 10px;
-  border-radius: 10px;
-  transition: none;
-  color: #B5E8E0;
-  background: #161320;
-}
-
-#custom-launcher {
-  font-size: 18px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 5px;
-  border-radius: 10px;
-  transition: none;
-  color: #7dcfff;
-  background: transparent;
-}
-
+/* ── Power ────────────────────────────────────────────────────────────────── */
 #custom-power {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  margin-bottom: 6px;
-  padding-right: 15px;
-  border-radius: 18px;
+  color: #E24B4A;
+/*  background: transparent; */
+  padding: 4px 15px;
   margin-right: 10px;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: bold;
-  transition: none;
-  color: #F1F1F1;
-  background: transparent;
 }
 
+/* ── Updates ──────────────────────────────────────────────────────────────── */
 #custom-updates {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 0px;
-  border-radius: 10px;
-  transition: none;
   color: #161320;
   background: #E8A2AF;
+  border-radius: 10px;
 }
 
+/* ── Media ────────────────────────────────────────────────────────────────── */
 #custom-media {
-  margin-top: 6px;
-  margin-left: 8px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 0px;
-  border-radius: 10px;
-  transition: none;
   color: #161320;
   background: #F2CDCD;
+  border-radius: 10px;
+}
+
+/* ── Tray ─────────────────────────────────────────────────────────────────── */
+#tray {
+  color: #B5E8E0;
+  background: #161320;
+  border-radius: 10px;
+  padding: 4px 10px;
+  margin: 6px 4px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #f7768e;
+  border-radius: 12px;
+}
+
+/* ── Weather ──────────────────────────────────────────────────────────────── */
+#custom-weather {
+  color: #AFA9EC;
+  background: #222330;
+  border-radius: 18px;
+  padding: 4px 10px;
+  margin: 4px 4px;
+}
+
+/* ── Tooltip ──────────────────────────────────────────────────────────────── */
+tooltip,
+tooltip box,
+tooltip decoration {
+  background: #1A1A2E;
+  border-radius: 18px;
+  border: 1px solid #252540;
+  padding: 8px;
+}
+
+tooltip label {
+  color: #F1F1F1;
 }

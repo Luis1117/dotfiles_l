@@ -8,7 +8,7 @@ edit = [
 # ]
 pdf = [
     { run = 'tdf "$@"', desc = "Abrir PDF com tdf", block = true },
-    { run = 'gtk-launch org.gnome.Papers "$@"', desc = "Abrir com Papers", orphan = true },
+    { run = 'zathura "$@"', desc = "Zathura", orphan = true },
     { run = 'xdg-open "$@"', desc = "Open with default app" }
 ]
 
@@ -28,39 +28,42 @@ gnuplot = [
 # ]
 
 djvu = [
-    { run = 'gtk-launch org.gnome.Papers "$@"', desc = "Abrir com Papers", orphan = true },
+    { run = 'zathura "$@"', orphan = true },
     { run = 'atril "$@"', desc = "Abrir com Atril", orphan = true }
 ]
 
 [open]
 rules = [
-    { name = "*/", use = "folder" },
-    # PDFs
+    { url = "*/", use = "folder" },
+    # PDFs e DjVu
     { mime = "application/pdf", use = "pdf" },
+    { mime = "image/vnd.djvu", use = "pdf" },
+    { url = "*.djvu", use = "pdf" },
+
     # Imagens
     { mime = "image/*", use = "image" },
     # Textos para editar
     { mime = "text/*", use = "edit" },
-    { name = "*.txt", use = "edit" },
-    { name = "*.md", use = "edit" },
-    { name = "*.py", use = "edit" },
-    { name = "*.sh", use = "edit" },
-    { name = "*.toml", use = "edit" },
-    { name = "*.yaml", use = "edit" },
-    { name = "*.yml", use = "edit" },
-    { name = "*.ipynb", use = "edit" },
-    { name = "*.json", use = "edit" },
-    { name = "*.js", use = "edit" },
-    { name = "*.css", use = "edit" },
-    { name = "*.html", use = "edit" },
+    { url = "*.txt", use = "edit" },
+    { url = "*.md", use = "edit" },
+    { url = "*.py", use = "edit" },
+    { url = "*.sh", use = "edit" },
+    { url = "*.toml", use = "edit" },
+    { url = "*.yaml", use = "edit" },
+    { url = "*.yml", use = "edit" },
+    { url = "*.ipynb", use = "edit" },
+    { url = "*.json", use = "edit" },
+    { url = "*.js", use = "edit" },
+    { url = "*.css", use = "edit" },
+    { url = "*.html", use = "edit" },
     # Gnuplot
-    { name = "*.gp", use = "gnuplot" },
-    { name = "*.plt", use = "gnuplot" },
-    { name = "*.gnuplot", use = "gnuplot" },
+    { url = "*.gp", use = "gnuplot" },
+    { url = "*.plt", use = "gnuplot" },
+    { url = "*.gnuplot", use = "gnuplot" },
 ]
 
 [plugin]
 prepend_fetchers = [
-  { id = "git", name = "*", run = "git" },
-  { id = "git", name = "*/", run = "git" },
+  { id = "git", group = "file", url = "*", run = "git" },
+  { id = "git", group = "directory", url = "*/", run = "git" },
 ]

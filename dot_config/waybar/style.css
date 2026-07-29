@@ -51,37 +51,41 @@ window#waybar.hidden {
 
 /* ── Workspaces ───────────────────────────────────────────────────────────── */
 #workspaces {
-  padding: 6px 8px;
+  padding: 2px 4px;
   margin: 6px 6px;
   background: #222330;
+  border-radius: 12px;
 }
 
 #workspaces button {
-  color: #B5E8E6;
-  background: transparent;
-  padding: 0 10px;
-  border-radius: 8px;
-  transition: none;
+    padding: 0 10px;
+    margin: 0 3px;
+    min-width: 30px;
+    min-height: 28px;
+
+    background: #2d2f42;   /* Fundo de todos */
+    color: #bfc7d5;
+
+    border-radius: 8px;
+    border: none;
+
+    transition: background 0.2s ease;
+}
+
+/* Workspace ocupado (opcional) */
+#workspaces button.visible {
+    background: #34374c;
 }
 
 #workspaces button.active {
-  color: #e0af68;
-  font-size: 6px;
-}
-
-#workspaces button.persistent {
-  color: #FF6B35;
-  font-size: 6px;
-}
-
-#workspaces button.empty {
-  color: #c0c0c0;
-  font-size: 2px;
+  background:@accent;
+  color: @base;
+  font-weight: bold;
+  border: 2px solid rgba(255, 255, 255, 0.25);
 }
 
 #workspaces button:hover {
-  background: #2a2b3d;
-  color: #c0caf5;
+  background: alpha(@accent, 0.3);
 }
 
 /* ── CPU ──────────────────────────────────────────────────────────────────── */

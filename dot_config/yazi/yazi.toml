@@ -1,6 +1,6 @@
 [opener]
 edit = [
-    { run = '/sbin/nvim "$@"', block = true, desc = "Edit with Neovim" }
+    { run = 'kitty @ launch --type=tab nvim "$@"', desc = "Edit with Neovim (nova aba)", orphan = true }
 ]
 # pdf = [
 #     { run = 'tdf "$@"', desc = "Abrir PDF com tdf", block=true },
@@ -9,6 +9,7 @@ edit = [
 pdf = [
     { run = 'tdf "$@"', desc = "Abrir PDF com tdf", block = true },
     { run = 'zathura "$@"', desc = "Zathura", orphan = true },
+    { run = 'sioyek --new-instance "$@"', desc = "Sioyek", orphan = true },
     { run = 'xdg-open "$@"', desc = "Open with default app" }
 ]
 

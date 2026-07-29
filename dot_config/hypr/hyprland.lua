@@ -188,7 +188,7 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd(
 ))
 
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("walker --modules clipboard"))
+hl.bind(mainMod .. " + v", hl.dsp.exec_cmd("walker --modules clipboard"))
 
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))

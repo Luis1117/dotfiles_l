@@ -106,3 +106,23 @@ desc = "📝 Editar com $EDITOR"
 # on = [ "c", "n" ]
 # run = "shell 'echo -n \"$(basename $0)\" | xclip -selection clipboard'"
 # desc = "📋 Copiar nome do arquivo"
+
+# ============================================
+# 🔍 FAZIF - BUSCA EM ARQUIVOS/PDFs
+# ============================================
+[[mgr.prepend_keymap]]
+on = "<C-f>"
+run = "plugin fazif fazifrga"
+desc = "🔍 Buscar em PDFs com rga"
+
+[[mgr.prepend_keymap]]
+on = "<C-g>"
+run = "plugin fazif fazifrg"
+desc = "🔍 Buscar conteúdo com ripgrep"
+
+[[mgr.prepend_keymap]]
+on = "<C-e>"
+run = "plugin fazif faziffd"
+desc = "🔍 Encontrar arquivos com fd"
+
+
